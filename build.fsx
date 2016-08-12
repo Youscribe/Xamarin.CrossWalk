@@ -70,8 +70,7 @@ Target "NuGet" (fun _ ->
     |> Array.filter(fun n -> n.EndsWith ".nupkg" |> not)
     |> DeleteFiles
 
-  copyToNugetDir iosBuildDir
-
+  
   let version = "17.46.459.0"
 
   let androidArmVersion = nugetsVersions "Xamarin.Droid.CrossWalkLite.Arm" version
