@@ -15,6 +15,8 @@ open ProcessHelper
 open System.Diagnostics
 
 let androidBuildDir = __SOURCE_DIRECTORY__ @@ "droidBuild/"
+let armBuildDir = androidBuildDir @@ "arm/"
+let x86BuildDir = androidBuildDir @@ "arm/"
 let prodDir = __SOURCE_DIRECTORY__ @@ "pack/"
 let nugetsDir = __SOURCE_DIRECTORY__ @@ "NuGet/"
 
@@ -46,11 +48,15 @@ let publishNuget nupkg key url =
 ensureDirectory androidBuildDir
 ensureDirectory prodDir
 ensureDirectory nugetsDir
+ensureDirectory armBuildDir
+ensureDirectory x86BuildDir
 
 Target "Clean" (fun _ ->
     CleanDir androidBuildDir
     CleanDir prodDir
     CleanDir nugetsDir
+    CleanDir armBuildDir
+    CleanDir x86BuildDir
 )
 
 Target "NuGet" (fun _ ->
@@ -78,7 +84,7 @@ Target "NuGet" (fun _ ->
 
   removeNotNugetFiles()
 
-  copyToNugetDir androidBuildDir
+  copyToNugetDir armBuildDir
 
   NuGet (fun p -> 
     { p with
@@ -87,7 +93,7 @@ Target "NuGet" (fun _ ->
         Description = "CrossWalkLite for Xamarin Android ARM"
         OutputPath = nugetsDir
         Files = [
-                  ("Xamarin.Droid.CrossWalkLite.Arm.dll", Some @"lib\MonoAndroid44\", None)
+                  ("Xamarin.Droid.CrossWalkLite.dll", Some @"lib\MonoAndroid44\", None)
                 ]
         Dependencies = []
         AccessKey = nugetKey
@@ -96,6 +102,10 @@ Target "NuGet" (fun _ ->
         Publish = true
         Properties = [("Configuration","Release")]
     }) "template.nuspec"
+
+  removeNotNugetFiles()
+
+  copyToNugetDir x86BuildDir
     
   NuGet (fun p -> 
     { p with
@@ -104,7 +114,7 @@ Target "NuGet" (fun _ ->
         Description = "CrossWalkLite for Xamarin Android x86"
         OutputPath = nugetsDir
         Files = [
-                  ("Xamarin.Droid.CrossWalkLite.x86.dll", Some @"lib\MonoAndroid44\", None)
+                  ("Xamarin.Droid.CrossWalkLite.dll", Some @"lib\MonoAndroid44\", None)
                 ]
         Dependencies = []
         AccessKey = nugetKey
@@ -119,11 +129,11 @@ Target "NuGet" (fun _ ->
 
 Target "Build-Android" (fun _ ->
     !! "**/Xamarin.Droid.CrossWalkLite.Arm.csproj"
-        |> MSBuildRelease androidBuildDir "Build"
+        |> MSBuildRelease armBuildDir "Build"
         |> Log "BuildAndroidLib-Output: "
 
     !! "**/Xamarin.Droid.CrossWalkLite.x86.csproj"
-        |> MSBuildRelease androidBuildDir "Build"
+        |> MSBuildRelease x86BuildDir "Build"
         |> Log "BuildAndroidLib-Output: "
 )
 
