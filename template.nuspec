@@ -5,7 +5,7 @@
     <version>@build.number@</version>
     <authors>@authors@</authors>
     <owners>@authors@</owners>
-    <projectUrl>http://github.com/YouScribe/</projectUrl>
+    <projectUrl>https://github.com/Youscribe/Xamarin.CrossWalk</projectUrl>
     <iconUrl>https://crosswalk-project.org/assets/cw-logo-circle.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>@description@</description>
