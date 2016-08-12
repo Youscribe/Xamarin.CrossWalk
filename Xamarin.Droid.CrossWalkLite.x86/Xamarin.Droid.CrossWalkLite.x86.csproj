@@ -43,7 +43,7 @@
   <ItemGroup>
     <None Include="Jars\AboutJars.txt" />
     <None Include="Additions\AboutAdditions.txt" />
-    <LibraryProjectZip Include="Jars\xwalk_core_library_canary-17.46.459.1-arm.aar" />
+    <LibraryProjectZip Include="Jars\xwalk_core_library_canary-17.46.459.1-x86.aar" />
   </ItemGroup>
   <ItemGroup>
     <TransformFile Include="Transforms\Metadata.xml" />

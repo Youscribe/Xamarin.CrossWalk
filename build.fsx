@@ -25,7 +25,7 @@ let IncBuild:NuGetVersionIncrement =
         { v with Build=(System.Int32.Parse(v.Build)+1).ToString() }
 
 let nugetKey = getBuildParamOrDefault "nugetKey" ""
-let nugetPublishUrl = "http://nuget.org"
+let nugetPublishUrl = "https://nuget.org/"
 let nugetsVersions name dv = 
     NuGetVersion.nextVersion <|
         fun arg -> 
@@ -92,12 +92,12 @@ Target "NuGet" (fun _ ->
         Dependencies = []
         AccessKey = nugetKey
         PublishUrl = nugetPublishUrl
-        Version = androidVersion
+        Version = androidArmVersion
         Publish = true
         Properties = [("Configuration","Release")]
     }) "template.nuspec"
     
-    NuGet (fun p -> 
+  NuGet (fun p -> 
     { p with
         Authors = ["Yann ROBIN"]
         Project = "Xamarin.Droid.CrossWalkLite.x86"
@@ -109,7 +109,7 @@ Target "NuGet" (fun _ ->
         Dependencies = []
         AccessKey = nugetKey
         PublishUrl = nugetPublishUrl
-        Version = androidVersion
+        Version = androidx86Version
         Publish = true
         Properties = [("Configuration","Release")]
     }) "template.nuspec"
@@ -117,12 +117,12 @@ Target "NuGet" (fun _ ->
   removeNotNugetFiles()
 )
 
-Target "Build-Android-Core" (fun _ ->
-    !! "**/Xamarin.Droid.CrossWalkLite.Arm.fsproj"
+Target "Build-Android" (fun _ ->
+    !! "**/Xamarin.Droid.CrossWalkLite.Arm.csproj"
         |> MSBuildRelease androidBuildDir "Build"
         |> Log "BuildAndroidLib-Output: "
 
-    !! "**/Xamarin.Droid.CrossWalkLite.x86.fsproj"
+    !! "**/Xamarin.Droid.CrossWalkLite.x86.csproj"
         |> MSBuildRelease androidBuildDir "Build"
         |> Log "BuildAndroidLib-Output: "
 )

@@ -56,3 +56,4 @@ packages/*
 .fake/*
 NuGet/*
 droidBuild/*
+*.csproj.user
