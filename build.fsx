@@ -22,7 +22,7 @@ let solutionFile  = "Xamarin.Droid.CrossWalk.sln"
 
 let IncBuild:NuGetVersionIncrement = 
     fun (v:SemVerInfo) ->
-        { v with Build=(v.Build+1) }
+        { v with Build=(System.Int32.Parse(v.Build)+1).ToString() }
 
 let nugetKey = getBuildParamOrDefault "nugetKey" ""
 let nugetPublishUrl = "http://nuget.org"
