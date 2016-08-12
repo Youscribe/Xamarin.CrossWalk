@@ -22,7 +22,7 @@ let solutionFile  = "Xamarin.Droid.CrossWalk.sln"
 
 let IncBuild:NuGetVersionIncrement = 
     fun (v:SemVerInfo) ->
-        { v with Build=(System.Int32.Parse(v.Build)+1).ToString() }
+        { v with Build=(System.Int32.Parse(if v.Build = "" then "0" else v.Build)+1).ToString() }
 
 let nugetKey = getBuildParamOrDefault "nugetKey" ""
 let nugetPublishUrl = "https://nuget.org/"
@@ -71,10 +71,10 @@ Target "NuGet" (fun _ ->
     |> DeleteFiles
 
   
-  let version = "17.46.459.0"
+  let version = "17.46.459"
 
-  let androidArmVersion = nugetsVersions "Xamarin.Droid.CrossWalkLite.Arm" version
-  let androidx86Version = nugetsVersions "Xamarin.Droid.CrossWalkLite.x86" version
+  let androidArmVersion = (nugetsVersions "Xamarin.Droid.CrossWalkLite.Arm" version).Replace("-", "")
+  let androidx86Version = (nugetsVersions "Xamarin.Droid.CrossWalkLite.x86" version).Replace("-", "")
 
   removeNotNugetFiles()
 
