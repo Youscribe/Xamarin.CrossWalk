@@ -1,0 +1,29 @@
+<metadata>
+  <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+  
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+  <remove-node path="/api/package[@name='org.xwalk.core.internal']/class[@name='XWalkExtensionBridge']" />
+  <remove-node path="/api/package[@name='org.xwalk.core.internal']/class[@name='XWalkLaunchScreenManager']" />
+  <remove-node path="/api/package[@name='org.xwalk.core.internal']/class[@name='XWalkNavigationHandlerImpl']" />
+  <remove-node path="/api/package[@name='org.xwalk.core.internal']/class[@name='XWalkNotificationServiceImpl']" />
+  <remove-node path="/api/package[@name='org.xwalk.core.internal']/class[@name='XWalkPreferencesInternal']" />
+  <remove-node path="/api/package[@name='org.xwalk.core.internal']/class[@name='XWalkPreferencesInternal_KeyValueChangeListenerImplementor']" />
+  <remove-node path="/api/package[@name='org.xwalk.core.internal.XWalkPreferencesInternal']/class[@name='KeyValueChangeListener']" />
+
+  <remove-node path="/api/package[@name='org.chromium.mojo.system']/interface[@name='DataPipe.ConsumerHandle']" />
+  <remove-node path="/api/package[@name='org.chromium.ui.text']/class[@name='SpanApplier.SpanInfo']" />
+
+  <remove-node path="/api/package[@name='org.chromium.media']/class[@name='VideoCapture']/field[@name='mCaptureFormat']" />
+  <remove-node path="/api/package[@name='org.xwalk.core.internal']/*" />
+
+  <!--<attr path="/api/package[@name='org.chromium.mojo.bindings']/class[@name='Interface.AbstractProxy']/method[@name='getProxyHandler' and count(parameter)=0]" name="managedReturn">Org.Chromium.Mojo.Bindings.IInterfaceProxyHandler</attr>-->
+  <attr path="/api/package[@name='org.chromium.mojo.bindings']/class[@name='Interface.AbstractProxy.HandlerImpl']" name="visibility">public</attr>
+  <attr path="/api/package[@name='org.chromium.mojo.bindings']/class[@name='RouterImpl']/method[@name='passHandle' and count(parameter)=0]" name="managedReturn">Java.Lang.Object</attr>
+  <attr path="/api/package[@name='org.xwalk.core']/class[@name='XWalkUpdater.DecompressTask']/method[@name='call' and count(parameter)=0]" name="managedReturn">Java.Lang.Object</attr>
+
+  <add-node path="/api/package[@name='org.xwalk.core']/class[@name='XWalkView']" />
+</metadata>
